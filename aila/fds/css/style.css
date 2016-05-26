@@ -1,0 +1,30 @@
+a{
+	text-decoration:none;
+	color:#FFF;
+	font-size:22px;
+	font-family:Rosario, Gabriola, "Gill Sans MT", "Gill Sans Ultra Bold Condensed", "Rosewood Std Regular";
+
+	
+}
+
+#feature1,#feature2,#feature3{
+	
+	background:url(image/tile.jpg);
+	
+	font-family:Rosario, Gabriola, "Gill Sans MT", "Gill Sans Ultra Bold Condensed", "Rosewood Std Regular";
+	font-size:22px;
+}
+
+#logo{
+	margin:0px;
+	padding:0px;
+	
+}
+#signUp{
+	color:#FFF;
+	font-size:22px;
+	font-family:Rosario, Gabriola, "Gill Sans MT", "Gill Sans Ultra Bold Condensed", "Rosewood Std Regular";
+}
+#con{
+	background:url(image/tile.jpg) repeat;
+}
