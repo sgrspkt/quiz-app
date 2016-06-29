@@ -30,6 +30,9 @@ class Connection
 	public function setMessage($msg=''){
 		$this->msg=$msg;
 	}
+	public function setRow($rw=''){
+		$this->row=$rw;
+	}
 	public function setSuccess($success=''){
 		$this->success=$success;
 	}

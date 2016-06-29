@@ -13,14 +13,14 @@ $page_to_load = "includes/add_question.php";
 break;
 }
 else if($action == 'view'){
-$page_to_load= "includes/view_question.php";
+$page_to_load= "includes/view_question_answer.php";
 break;
 }else if ($action=='delete'){
 	$page_to_load="process/process_delete_question.php";
 	break;
 }
 	else if($action=='update'){
-		$page_to_load="includes/update_question.php";
+		$page_to_load="includes/update_question_answer.php";
 	break;
 	}
 default:
@@ -45,6 +45,15 @@ break;
 		$page_to_load="includes/update_category.php";
 	break;
 	}
+default:
+{
+	$page_to_load="dashboard.php";
+}
+case 'user';
+if($action == 'view'){
+$page_to_load= "includes/view_user.php";
+}
+break;
 default:
 {
 	$page_to_load="dashboard.php";

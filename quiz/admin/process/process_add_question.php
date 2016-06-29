@@ -2,43 +2,46 @@
 
 session_start();
 require_once('../classes/connection.class.php');
-require_once('../classes/question.class.php');
+require_once('../classes/question-answer.class.php');
 
-$addaboutObj=new question();
+$addQaObj=new QuestionAnswer();
 
 if(isset($_POST['add_question'])){
-echo $question_name = $_POST['question_name'];
-echo $category = $_POST['category'];
-echo $created_at = $_POST['created_at'];
-echo $updated_at = $_POST['updated_at'];
-echo $correct_answer = $_POST['correct_answer'];
-foreach($_POST['fields'] as $selected){
-echo $selected."</br>";
+$question_title = $_POST['question_name'];
+$category = $_POST['category'];
+$created_at = $_POST['created_at'];
+$updated_at = $_POST['updated_at'];
+$correct_answer = $_POST['correct_answer'];
+$answers = $_POST['fields'];
 
 }
-$addaboutObj->setQuestionId($about_id);
-$addaboutObj->setQuestionName($about_thumb_image);
-$addaboutObj->setCategory($about_desc);
-$addaboutObj->setCreatedAt($about_desc);
-$addaboutObj->setUpdatedAt($about_desc);
-$addaboutObj->setCorrectAnswer($about_desc);
+
+$addQaObj->setQuestionTitle($question_title);
+$addQaObj->setCategory($category);
+$addQaObj->setCorrectAnswer($correct_answer);
+$addQaObj->setAnswer($answers);
+$addQaObj->setCreatedAt($created_at);
+$addQaObj->setUpdatedAt($updated_at);
 
 /*echo '<pre>';
-print_r($addaboutObj);
+print_r($addQaObj);
 echo '</pre>';
 exit;*/
 
-$flag=$addaboutObj->addabout();
+$flag=$addQaObj->addQa();
 
 if($flag){
+	//echo "added";
 	$_SESSION['question_added'] = true;
-		$_SESSION['question_added_msg']=$addaboutObj->success="The about successfully added";
-		header('location:../index.php?page=about&action=view');
+		$_SESSION['question_added_msg']=$addaboutObj->success="The question successfully added";
+		header('location:../index.php?page=question&action=view');
 	}
 else{
-	$_SESSION['question_not_added'] = true;
+	echo "not added";
+	/*$_SESSION['question_not_added'] = true;
 	$_SESSION['question_not_added_msg']=$addaboutObj->error="The about couldn't be added";
-	header('location:../index.php?page=about&action=add');
+	header('location:../index.php?page=about&action=add');*/
 	}
+
 ?>
 

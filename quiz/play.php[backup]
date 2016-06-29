@@ -1,0 +1,116 @@
+<?php
+require_once('admin/classes/connection.class.php');
+require_once('admin/classes/question-answer.class.php');
+?>
+<?php
+$viewobj=new QuestionAnswer();
+$views=$viewobj->viewQa();
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>QuizApp | Homepage</title>
+<link rel="stylesheet" type="text/css" href="css/search.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" href="popup/css/normalize.min.css">
+        <link rel="stylesheet" href="popup/css/animate.min.css">
+        <style>
+            #btn-close-modal {
+                width:100%;
+                text-align: center;
+                cursor:pointer;
+                color:#fff;
+            }
+
+        </style>
+</head>
+<?php include('header.php');?>
+<!-- search form 1 -->
+<body>
+<div class="container">
+	<div class="row">
+	
+		<div class="col-md-12">
+		
+			 <table id="example2" class="table table-bordered table-hover" border="0">
+               
+                  <?php
+  if(sizeof($views>0)){
+    
+   $newArr = array();
+    foreach($views as $paper) {
+        $id = $paper['category_name'];
+        if (!isset($newArr[$id])) {
+            $newArr[$id] = $paper;
+            $newArr[$id]['answer'] = array();
+        }
+        $newArr[$id]['answer'][] = $paper['answer'];
+    }
+
+    
+
+  foreach($newArr as $value){
+  	
+   echo '<tr><td>'.$value['question_title'].'</td></tr>' ;
+  	foreach ($value['answer'] as $key => $values) {
+  		# code...
+  		echo '<tr><td><input type="radio" name="answer">'.$values.'</td></tr>';
+  	}
+   
+
+  ?>
+	
+                  
+               
+                <?php
+}
+}
+                ?>
+                
+              </table>
+		</div>
+		
+	</div>
+</div>
+
+	 <ul>
+	            <li><a id="play" href="#animatedModal">DEMO01</a></li>
+	          
+	        </ul>
+      
+        <div id="animatedModal">
+            <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID -->
+            <div  id="btn-close-modal" class="close-animatedModal"> 
+                CLOSE MODAL
+            </div>
+                
+            <div class="modal-content">
+                <!--Your modal content goes here-->
+            </div>
+        </div>
+
+       
+        <script src="popup/js/jquery.min.js"></script>
+        <script src="popup/js/animatedModal.min.js"></script>
+        <script>
+
+            $("#play").animatedModal();
+
+            
+
+        </script>
+</body>
+</html>
+
+<style type="text/css">
+	.col-md-12{
+		width: 50%;
+    background-color: blanchedalmond;
+    height: 100%;
+	}
+</style>
+
+

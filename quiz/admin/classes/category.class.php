@@ -1,4 +1,5 @@
 <?php
+require_once('connection.class.php');
 class Category extends Connection{
 		private $category_id;
 		private $category_name;
@@ -92,13 +93,6 @@ class Category extends Connection{
 		
 		//var_dump($this->category_id); die();
 		$this->category_id = (int)$this->category_id; 
-		/*var_dump($this->category_id);
-		die();
-		echo $this->category_id=isset($_GET['$this->category_id'])?(int)$_GET['$this->category_id']:'';
-		die();*/
-		
-		//echo $this->category_id;
-		//exit;
 		
 		$this->sql="UPDATE tbl_category SET category_name='$this->category_name',created_at='$this->created_at',updated_at='$this->updated_at' WHERE category_id= $this->category_id ";
 		/*echo $this->sql;
@@ -128,4 +122,40 @@ class Category extends Connection{
 				}
 		return $this->data;
 	}
+	public function searchAjax(){
+		
+		
+				$this->sql="SELECT category_name FROM tbl_category where category_name like '%".$_POST['query']."%'";
+
+		$this->res = mysqli_query($this->conxn,$this->sql) or trigger_error($this->err=mysqli_error($this->conxn));
+			$output = '<ul class="list-unstyled">';
+	$this->numRows = mysqli_num_rows($this->res);
+	if($this->numRows>0){
+		while($this->row = mysqli_fetch_array($this->res)){
+			$output.='<li>'.$this->row['category_name'].'</li>';
+		}
+	}else{
+		$output.='</li>not available</li>';
+	}
+	$output.='</ul>';
+	return  $output;
+}
+/*public function searchCategoryId(){
+	$this->sql="SELECT q.question_title,a.answer FROM tbl_question q JOIN tbl_answer a
+								ON q.question_id = a.question_id 
+								JOIN tbl_category c
+								ON q.category_id = c.category_id
+								WHERE q.category_name = '".$_POST['category']."'";
+	//$this->sql="SELECT category_id FROM tbl_category where category_name like '%".$_POST['category']."%'";
+	$this->res = mysqli_query($this->conxn,$this->sql) or trigger_error($this->err=mysqli_error($this->conxn));
+			
+	$this->numRows = mysqli_num_rows($this->res);
+	if($this->numRows>0){
+		while($this->row = mysqli_fetch_array($this->res)){
+			$output=$this->row['category_id'];
+		}
+	
+	return  $output;
+}
+}*/
 }

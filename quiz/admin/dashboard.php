@@ -1,6 +1,8 @@
 <?php 
 require_once('classes/connection.class.php');
 require_once('classes/category.class.php');
+require_once('../classes/user.class.php');
+require_once('classes/question-answer.class.php');
 
 $catObj = new category();
 $catObj->countCategory();
@@ -8,6 +10,15 @@ $views = $catObj->countCategory();
 /*echo '<pre>';
 print_r($catObj);
 echo '</pre>';*/
+
+$userObj = new User();
+$userObj->countUser();
+$userView = $userObj->countUser();
+
+
+$quesObj = new QuestionAnswer();
+$quesObj->countQa();
+$quesView = $quesObj->countQa();
 ?>
 <section class="content">
       <!-- Small boxes (Stat box) -->
@@ -15,8 +26,16 @@ echo '</pre>';*/
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>150</h3>
+            <div class="inner"><h3>
+<?php 
+if(sizeof($quesView)>0){
+  foreach ($quesView as $value) {
+    # code...
+    echo $value['count'];
+  }
+}
+?>
+</h3>
 
               <p>Questions</p>
             </div>
@@ -40,7 +59,7 @@ echo '</pre>';*/
 
           }
         }
-        ?>
+        ?></h3>
 
               <sup style="font-size: 20px"></sup></h3>
 
@@ -57,7 +76,17 @@ echo '</pre>';*/
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+            <h3>
+             <?php 
+        if(sizeof($userView>0)){
+          foreach ($userView as $value) {
+            # code...
+            echo $value['count'];
+
+          }
+        }
+        ?>
+           </h3>
 
               <p>User Registrations</p>
             </div>
